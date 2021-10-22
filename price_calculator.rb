@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 
-# prints a welcome message to the user
+# Prints a welcome message to the user
 def print_welcome(prices)
     puts "Welcome to Emma's Market"
     puts
@@ -28,7 +28,7 @@ def parse_input
     return items
 end
 
-# inputs an array of items and adds the count to the groceries hash
+# Checks the array items and increments the groceries hash if the item is able to be purchased
 def count_items(items, groceries)
     items.each do |item|
         if item.include? "apple"
@@ -43,7 +43,7 @@ def count_items(items, groceries)
     end
 end
 
-# Calculating the total price and the amount saved
+# Calculates the total price of the groceries and the total amount saved
 def calculate_total(groceries, itemCost, prices)
     saved = 0
     total = 0
@@ -68,7 +68,7 @@ def calculate_total(groceries, itemCost, prices)
     return total, saved
 end
 
-# Prints the receipt for the purchase including the total cost and amount saved
+# Prints the receipt of the purchase, the total cost, and the amount saved
 def print_results(itemCost, groceries, result)
     puts
     puts "Item\tQuantity\tPrice"
@@ -83,8 +83,11 @@ def print_results(itemCost, groceries, result)
 end
 
 def prices_calculator
+    # prices hash contains the price for each item
     prices = {"apple" => 0.89, "banana" => 0.99, "bread" => 2.17, "milk" => 3.97}
+    # groceries hash contains the item and its count being purchased
     groceries = {"apple" => 0, "banana" => 0, "bread" => 0, "milk" => 0}
+    # itemCost hash contains the total cost of the items the user is buying
     itemCost = {}
 
     # Outputting a welcome message and the items for sale
