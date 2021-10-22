@@ -43,37 +43,10 @@ def count_items(items, groceries)
     end
 end
 
-# Prints the receipt for the purchase including the total cost and amount saved
-def print_results(itemCost, groceries, total, saved)
-    puts
-    puts "Item\tQuantity\tPrice"
-    puts "-------------------------------------"
-    itemCost.each do |key, value|
-        puts "#{key}\t#{groceries[key]}\t\t$#{value}"
-    end
-    puts
-    puts "Total price : $#{total.round(2)}"
-    puts "You saved $#{saved.round(2)} today."
-    puts
-end
-
-def prices_calculator
-    prices = {"apple" => 0.89, "banana" => 0.99, "bread" => 2.17, "milk" => 3.97}
-    groceries = {"apple" => 0, "banana" => 0, "bread" => 0, "milk" => 0}
-    itemCost = {}
-
-    # Outputting a welcome message and the items for sale
-    print_welcome(prices)
-
-    # Parsing the users input into an array of strings
-    items = parse_input
-
-    # Counting the total number of items and adding them to the groceries hash
-    count_items(items, groceries)
-
+# Calculating the total price and the amount saved
+def calculate_total(groceries, itemCost, prices)
     saved = 0
     total = 0
-    # Calculating the total price and the amount saved
     groceries.each do |key, value|
         if value > 0
             if key == "bread"
@@ -92,9 +65,42 @@ def prices_calculator
             total += itemCost[key]
         end
     end
+    return total, saved
+end
+
+# Prints the receipt for the purchase including the total cost and amount saved
+def print_results(itemCost, groceries, result)
+    puts
+    puts "Item\tQuantity\tPrice"
+    puts "-------------------------------------"
+    itemCost.each do |key, value|
+        puts "#{key}\t#{groceries[key]}\t\t$#{value}"
+    end
+    puts
+    puts "Total price : $#{result[0].round(2)}"
+    puts "You saved $#{result[1].round(2)} today."
+    puts
+end
+
+def prices_calculator
+    prices = {"apple" => 0.89, "banana" => 0.99, "bread" => 2.17, "milk" => 3.97}
+    groceries = {"apple" => 0, "banana" => 0, "bread" => 0, "milk" => 0}
+    itemCost = {}
+
+    # Outputting a welcome message and the items for sale
+    print_welcome(prices)
+
+    # Parsing the users input into an array of strings
+    items = parse_input
+
+    # Counting the total number of items and adding them to the groceries hash
+    count_items(items, groceries)
+
+    # Calculating the total price and the amount saved
+    result = calculate_total(groceries, itemCost, prices)
 
     # Outputting the results
-    print_results(itemCost, groceries, total, saved)
+    print_results(itemCost, groceries, result)
 end
 
 prices_calculator
